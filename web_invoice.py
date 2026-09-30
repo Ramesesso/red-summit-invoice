@@ -628,11 +628,12 @@ with col2:
             mime="application/pdf",
         )
 
-        b64 = base64.b64encode(pdf_bytes).decode("utf-8")
-        st.markdown(
-            f'<iframe src="data:application/pdf;base64,{b64}" '
-            'width="100%" height="800" type="application/pdf" '
-            'style="border:1px solid #ddd;border-radius:6px"></iframe>',
-            unsafe_allow_html=True,
-        )
+        with pdfplumber.open(io.BytesIO(pdf_bytes)) as preview_pdf:
+            num_pages = len(preview_pdf.pages)
+            for idx, page in enumerate(preview_pdf.pages, start=1):
+                st.image(
+                    page.to_image(resolution=150).original,
+                    caption=f"Page {idx}" if num_pages > 1 else None,
+                    use_container_width=True,
+                )
 
