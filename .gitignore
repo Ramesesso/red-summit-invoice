@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# Build / temp
+build/
+dist/
+*.spec
+Archive.zip
+
+# Agent config
+.agents/
+.claude/
