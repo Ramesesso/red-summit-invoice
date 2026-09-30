@@ -630,10 +630,11 @@ with col2:
 
         with pdfplumber.open(io.BytesIO(pdf_bytes)) as preview_pdf:
             num_pages = len(preview_pdf.pages)
-            for idx, page in enumerate(preview_pdf.pages, start=1):
-                st.image(
-                    page.to_image(resolution=150).original,
-                    caption=f"Page {idx}" if num_pages > 1 else None,
-                    use_container_width=True,
-                )
+            with st.container(height=800, border=True):
+                for idx, page in enumerate(preview_pdf.pages, start=1):
+                    st.image(
+                        page.to_image(resolution=150).original,
+                        caption=f"Page {idx}" if num_pages > 1 else None,
+                        use_container_width=True,
+                    )
 
