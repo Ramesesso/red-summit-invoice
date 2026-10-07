@@ -27,7 +27,7 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    st.title("Red Summit - 出單易")
+
     with st.form("login_form"):
         password = st.text_input("Password", type="password", max_chars=6)
         submitted = st.form_submit_button("Log in")
@@ -40,7 +40,7 @@ if not st.session_state.authenticated:
 
     if not st.session_state.authenticated:
         st.stop()
-        
+
 # --- Session State Initialization ---
 if 'invoice_data' not in st.session_state:
     st.session_state.invoice_data = {
