@@ -23,6 +23,24 @@ except ImportError:
 st.set_page_config(page_title="Red Summit - 出單易", layout="wide")
 st.title("Red Summit - 出單易 (Web Version)")
 
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.title("Red Summit - 出單易")
+    with st.form("login_form"):
+        password = st.text_input("Password", type="password", max_chars=6)
+        submitted = st.form_submit_button("Log in")
+
+    if submitted:
+        if password == "291213":
+            st.session_state.authenticated = True
+        else:
+            st.error("Incorrect password.")
+
+    if not st.session_state.authenticated:
+        st.stop()
+        
 # --- Session State Initialization ---
 if 'invoice_data' not in st.session_state:
     st.session_state.invoice_data = {
